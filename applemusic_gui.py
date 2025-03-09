@@ -43,6 +43,14 @@ class MainWindow(QMainWindow):
     
     def convert(self, url):
         try:
+            quantityI = len(firstIteration)
+            if len(firstIteration) > 0:
+                i=0
+                for i in range(quantityI):
+                    firstIteration.pop(0)
+                    if len(firstIteration) == 0:
+                        break
+                    
             url = lyric.text()
             name = url.split("https://genius.com/")
             finalName = name[1]
@@ -54,13 +62,24 @@ class MainWindow(QMainWindow):
             
             for a in soup.find("div", attrs={"id":"lyrics-root"}):       
                 firstIteration.append(a.get_text("\n"))
-
+            
             firstIteration.pop(-1)
             firstIteration.pop(-1)
             firstIteration.pop(0)
-            firstIteration.pop(1)
-            firstIteration.pop(3)
-            firstIteration.pop(3)
+            counter = 0
+            for c in firstIteration:
+                if "You might also like" == firstIteration[counter]:
+                    firstIteration.pop(counter)
+                if len(firstIteration[counter]) == 0:
+                    firstIteration.pop(counter)
+                if "Get tickets as low as" in firstIteration[counter]:
+                    firstIteration.pop(counter)
+                counter += 1
+            print(firstIteration)
+            
+            #firstIteration.pop(1)
+            #firstIteration.pop(3)
+            #firstIteration.pop(3)
             
             finalName += ".txt"
             
@@ -74,12 +93,7 @@ class MainWindow(QMainWindow):
                 for b in firstIteration:
                     f.write(b)
         except:
-            errorBox = QMessageBox()
-            errorBox.setIcon(QMessageBox.warning)
-            errorBox.setWindowTitle("Warning")
-            errorBox.setText("An error occurred....")
-            errorBox.setStandardButtons(QMessageBox.Ok)
-            retval = errorBox.exec()
+            pass
         
 def main():
     app = QApplication(sys.argv)
