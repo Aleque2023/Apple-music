@@ -29,12 +29,16 @@ class MainWindow(QMainWindow):
         fLabel = QLabel(self,text="Filepath")
         fLabel.setGeometry(20,75,50,25)
         
+        oLabel = QLabel(self,text="(Optional)")
+        oLabel.setGeometry(20,88,50,25)
+        oLabel.setFont(QFont("Arial",7))
+        
         global lyric
         lyric = QLineEdit(self, placeholderText="Enter URL here...")
         lyric.setGeometry(70,50,350,25)
         
         global fLine
-        fLine = QLineEdit(self, placeholderText="(Optional) Enter filepath...")
+        fLine = QLineEdit(self, placeholderText="EX: C:\\Users\\Alex\\Documents")
         fLine.setGeometry(70,75,350,25)
         
         lButton = QPushButton(self,text="Transfer")
@@ -77,12 +81,7 @@ class MainWindow(QMainWindow):
                 counter += 1
             print(firstIteration)
             
-            #firstIteration.pop(1)
-            #firstIteration.pop(3)
-            #firstIteration.pop(3)
-            
             finalName += ".txt"
-            
             if len(fPath) == 0:
                 f = open(finalName,"a", encoding="utf-8")
                 for b in firstIteration:
