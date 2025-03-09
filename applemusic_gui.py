@@ -79,18 +79,21 @@ class MainWindow(QMainWindow):
                 if "Get tickets as low as" in firstIteration[counter]:
                     firstIteration.pop(counter)
                 counter += 1
-            print(firstIteration)
+            
+            secondIteration = " ".join(firstIteration)
+            thirdIteration = secondIteration.replace("(\n", "\n(")
+            fourthIteration = thirdIteration.replace("[\n", "\n[")
+                        
+            print(fourthIteration)
             
             finalName += ".txt"
             if len(fPath) == 0:
                 f = open(finalName,"a", encoding="utf-8")
-                for b in firstIteration:
-                    f.write(b)
+                f.write(fourthIteration)
             else:
                 fnPath = fPath + "\\" + finalName
                 f = open(fnPath, "a", encoding="utf-8")
-                for b in firstIteration:
-                    f.write(b)
+                f.write(fourthIteration)
         except:
             pass
         
