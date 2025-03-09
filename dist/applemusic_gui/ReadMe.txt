@@ -1,0 +1,4 @@
+-Only works with genius links
+-Will crash if there is no input in the URL textbox
+-It might mess up if there are [] () present in the lyrics
+-If you notice any other problems let me know
